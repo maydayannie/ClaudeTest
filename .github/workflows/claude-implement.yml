@@ -34,4 +34,7 @@ jobs:
             --max-turns 30
             --model claude-3-5-sonnet
             --allowedTools Read,Write,Edit,Bash,Glob,Grep
-            --message "Please implement the feature requested in this GitHub issue comment: '${{ github.event.comment.body }}'. The issue description is: '${{ github.event.issue.body }}'."
+            --message "$CLAUDE_PROMPT"
+        
+        env:
+          CLAUDE_PROMPT: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}"
