@@ -37,4 +37,4 @@ jobs:
             --message "$CLAUDE_PROMPT"
         
         env:
-          CLAUDE_PROMPT: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}"
+          CLAUDE_PROMPT: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}. IMPORTANT: When creating a new git branch for this change, use the naming format 'claude-issue-${{ github.event.issue.number }}' without using any forward slashes."
