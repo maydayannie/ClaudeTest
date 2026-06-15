@@ -30,6 +30,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           prompt: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}"
           allowed_tools: "Read,Write,Edit,Bash,Glob,Grep"
           claude_args: "--max-turns 30 --model claude-sonnet-4-6"
