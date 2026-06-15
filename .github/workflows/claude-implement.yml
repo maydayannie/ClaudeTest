@@ -30,11 +30,6 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: >
-            --max-turns 30
-            --model claude-3-5-sonnet
-            --allowedTools Read,Write,Edit,Bash,Glob,Grep
-            --message "$CLAUDE_PROMPT"
-        
-        env:
-          CLAUDE_PROMPT: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}. IMPORTANT: When creating a new git branch for this change, use the naming format 'claude-issue-${{ github.event.issue.number }}' without using any forward slashes."
+          prompt: "Please implement the feature requested in this GitHub issue comment: ${{ github.event.comment.body }}"
+          allowed_tools: "Read,Write,Edit,Bash,Glob,Grep"
+          claude_args: "--max-turns 30 --model claude-sonnet-4-6"
