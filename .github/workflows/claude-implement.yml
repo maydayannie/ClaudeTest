@@ -1,0 +1,35 @@
+name: Claude Feature Implementation
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  implement:
+    name: Implement Feature from Issue
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    if: |
+      github.event.issue.pull_request == null &&
+      contains(github.event.comment.body, '@claude implement')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Implement feature with Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: >
+            --max-turns 30
+            --model claude-3-5-sonnet
+            --allowedTools Read,Write,Edit,Bash,Glob,Grep
